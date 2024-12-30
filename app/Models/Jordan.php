@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Adidas extends Model
+class Jordan extends Model
 {
     protected $fillable = [
-        'jenis_adidas',
+        'jenis_jordan',
         'gambar',
         'deskripsi',
         'harga',

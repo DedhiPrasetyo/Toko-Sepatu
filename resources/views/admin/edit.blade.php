@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Produk Adidas</title>
+    <title>Edit Produk</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto mt-10">
-        <h1 class="text-3xl font-bold mb-5">Edit Produk Adidas</h1>
-        <form action="{{ route('adidas.update', $adidas->id) }}" method="POST" enctype="multipart/form-data">
+        <h1 class="text-3xl font-bold mb-5">Edit Produk</h1>
+        <form action="{{ route('admin.update', $adidas->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-4">
@@ -48,9 +48,9 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update Produk Adidas</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update Produk</button>
         </form>
-        <a href="{{ route('adidas.index') }}" class="mt-4 inline-block text-blue-500">Kembali ke Daftar Produk</a>
+        <a href="{{ route('admin.index') }}" class="mt-4 inline-block text-blue-500">Kembali ke Daftar Produk</a>
     </div>
 </body>
 </html>

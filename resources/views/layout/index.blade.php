@@ -24,13 +24,14 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
             @foreach ($brands as $brand)
-                <a href="{{ url('deskripsi/' . strtolower($brand->nama_logo)) }}">
+                <a href="{{ route('deskripsi.' . strtolower($brand->nama_logo)) }}">
                     <div class="aspect-square bg-cover rounded-lg border-4 border-blue-500 shadow-lg transition-all hover:shadow-2xl hover:border-green-500 border-4 hover:-translate-y-[1px] flex flex-col items-center justify-center">
                         <img src="{{ asset('img/brands/'.$brand->logo) }}" alt="{{ $brand->nama_logo }}" class="h-32 w-32 object-contain">
                         <p class="mt-2 text-center font-semibold text-gray-700">{{ $brand->nama_logo }}</p>
                     </div>
                 </a>
             @endforeach
+        </div>
         </div>
 </main>
 
