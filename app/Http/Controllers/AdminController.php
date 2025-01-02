@@ -124,8 +124,8 @@ class AdminController extends Controller
      */
     public function show(string $id): View
     {
-        $adidas = Adidas::findOrFail($id);
-        return view('admin.show', compact('adidas'));
+        $produk = Adidas::find($id) ?? Jordan::find($id) ?? Nike::find($id);
+        return view('admin.show', compact('produk'));
     }
 
     /**
@@ -133,8 +133,8 @@ class AdminController extends Controller
      */
     public function edit(string $id): View
     {
-        $adidas = Adidas::findOrFail($id);
-        return view('admin.edit', compact('adidas'));
+        $produk = Adidas::find($id) ?? Jordan::find($id) ?? Nike::find($id);
+        return view('admin.edit', compact('produk'));
     }
 
     /**
@@ -150,20 +150,21 @@ class AdminController extends Controller
             'stock' => 'required|numeric',
         ]);
 
-        $adidas = Adidas::findOrFail($id);
-        $adidas->jenis_adidas = $request->jenis_adidas;
-        $adidas->deskripsi = $request->deskripsi;
-        $adidas->harga = $request->harga;
-        $adidas->stock = $request->stock;
+        $produk = Adidas::find($id) ?? Jordan::find($id) ?? Nike::find($id);
+        if ($produk) {
+            $produk->deskripsi = $request->deskripsi;
+            $produk->harga = $request->harga;
+            $produk->stock = $request->stock;
 
-        if ($request->hasFile('gambar')) {
-            $gambar = $request->file('gambar');
-            $gambarName = $gambar->hashName();
-            $gambar->move(public_path('img/adidas'), $gambarName);
-            $adidas->gambar = $gambarName;
+            if ($request->hasFile('gambar')) {
+                $gambar = $request->file('gambar');
+                $gambarName = $gambar->hashName();
+                $gambar->move(public_path('img/' . strtolower(class_basename($produk))), $gambarName);
+                $produk->gambar = $gambarName;
+            }
+
+            $produk->save();
         }
-
-        $adidas->save();
 
         return redirect()->route('admin.index')->with('success', 'Produk berhasil diperbarui.');
     }
@@ -173,8 +174,10 @@ class AdminController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        $adidas = Adidas::findOrFail($id);
-        $adidas->delete();
+        $produk = Adidas::find($id) ?? Jordan::find($id) ?? Nike::find($id);
+        if ($produk) {
+            $produk->delete();
+        }
 
         return redirect()->route('admin.index')->with('success', 'Produk berhasil dihapus.');
     }

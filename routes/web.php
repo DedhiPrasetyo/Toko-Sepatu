@@ -33,5 +33,14 @@ Route::get('/deskripsi/nike', [AdminController::class, 'nike'])->name('deskripsi
 Route::get('/deskripsi/puma', [AdminController::class, 'puma'])->name('deskripsi.puma');
 Route::get('/deskripsi/vans', [AdminController::class, 'vans'])->name('deskripsi.vans');
 
+// Rute untuk Admin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+Route::get('/admin/{id}', [AdminController::class, 'show'])->name('admin.show');
+Route::get('/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
+Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
 // Route CRUD untuk Adidas
 Route::resource('admin/index', AdminController::class)->except(['index', 'create', 'store']);
