@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Adidas;
 use App\Models\Jordan;
+use App\Models\Nike;
+use App\Models\Puma;
+use App\Models\Vans;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -16,8 +19,11 @@ class AdminController extends Controller
     public function index(): View
     {
         $adidas = Adidas::latest()->paginate(10);
-        $jordans = Jordan::latest()->paginate(10);
-        return view('admin.index', compact('adidas', 'jordans'));
+        $jordan = Jordan::latest()->paginate(10);
+        $nike = Nike::latest()->paginate(10);
+        $puma = Puma::latest()->paginate(10);
+        $vans = Vans::latest()->paginate(10);
+        return view('admin.index', compact('adidas', 'jordan', 'nike', 'puma', 'vans'));
     }
 
     /**
@@ -41,13 +47,11 @@ class AdminController extends Controller
             'stock' => 'required|numeric',
         ]);
 
-        if (!file_exists(public_path('img/adidas'))) {
-            mkdir(public_path('img/adidas'), 0777, true);
-        }
-
-        if (!file_exists(public_path('img/jordan'))) {
-            mkdir(public_path('img/jordan'), 0777, true);
-        }
+        $this->createDirectoryIfNotExists('img/adidas');
+        $this->createDirectoryIfNotExists('img/jordan');
+        $this->createDirectoryIfNotExists('img/nike');
+        $this->createDirectoryIfNotExists('img/puma');
+        $this->createDirectoryIfNotExists('img/vans');
 
         // Simpan berdasarkan jenis produk
         if ($request->jenis_produk === 'adidas') {
@@ -73,6 +77,42 @@ class AdminController extends Controller
                 'harga' => $request->harga,
                 'stock' => $request->stock,
                 'jenis_jordan' => $request->jenis_jordan,
+            ]);
+        } elseif ($request->jenis_produk === 'nike') {
+            $gambarNike = $request->file('gambar');
+            $gambarNameNike = $gambarNike->hashName();
+            $gambarNike->move(public_path('img/nike'), $gambarNameNike);
+
+            Nike::create([
+                'gambar' => $gambarNameNike,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'stock' => $request->stock,
+                'jenis_nike' => $request->jenis_nike,
+            ]);
+        } elseif ($request->jenis_produk === 'puma') {
+            $gambarPuma = $request->file('gambar');
+            $gambarNamePuma = $gambarPuma->hashName();
+            $gambarPuma->move(public_path('img/puma'), $gambarNamePuma);
+
+            Puma::create([
+                'gambar' => $gambarNamePuma,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'stock' => $request->stock,
+                'jenis_puma' => $request->jenis_puma,
+            ]);
+        } elseif ($request->jenis_produk === 'vans') {
+            $gambarVans = $request->file('gambar');
+            $gambarNameVans = $gambarVans->hashName();
+            $gambarVans->move(public_path('img/vans'), $gambarNameVans);
+
+            Vans::create([
+                'gambar' => $gambarNameVans,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'stock' => $request->stock,
+                'jenis_vans' => $request->jenis_vans,
             ]);
         }
 
@@ -147,8 +187,26 @@ class AdminController extends Controller
 
     public function jordan(): View
     {
-        $jordans = Jordan::latest()->paginate(10);
-        return view('admin.jordan', compact('jordans'));
+        $jordan = Jordan::latest()->paginate(10);
+        return view('deskripsi.jordan', compact('jordan'));
+    }
+
+    public function nike(): View
+    {
+        $nike = Nike::latest()->paginate(10);
+        return view('deskripsi.nike', compact('nike'));
+    }
+
+    public function puma(): View
+    {
+        $puma = Puma::latest()->paginate(10);
+        return view('deskripsi.puma', compact('puma'));
+    }
+
+    public function vans(): View
+    {
+        $vans = Vans::latest()->paginate(10);
+        return view('deskripsi.vans', compact('vans'));
     }
 
     private function createDirectoryIfNotExists($path)

@@ -47,9 +47,9 @@
 
     <h2 class="text-3xl font-semibold mb-4 mt-8 text-gray-800">Produk Jordan</h2>
     @php
-        $groupedJordans = $jordans->groupBy('jenis_jordan');
+        $groupedJordan = $jordan->groupBy('jenis_jordan');
     @endphp
-    @foreach($groupedJordans as $jenis => $items)
+    @foreach($groupedJordan as $jenis => $items)
         <h3 class="text-2xl font-medium mt-4 text-gray-700">{{ $jenis }}</h3>
         <div class="overflow-x-auto">
             <table class="min-w-full mt-2 border border-gray-300 rounded-lg">
@@ -87,7 +87,7 @@
 
     <div class="mt-6">
         {{ $adidas->links() }}
-        {{ $jordans->links() }}
+        {{ $jordan->links() }}
     </div>
 </div>
 <!-- End Generation Here -->

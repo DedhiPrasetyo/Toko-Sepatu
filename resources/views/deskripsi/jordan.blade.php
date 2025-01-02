@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="text-3xl font-bold mb-5">Deskripsi Produk Jordan</h1>
-@foreach($jordans as $item)
+@foreach($jordan as $item)
     <div>
         <h2>{{ $item->jenis_jordan }}</h2>
         <img src="{{ asset('img/jordan/'.$item->gambar) }}" alt="{{ $item->jenis_jordan }}">

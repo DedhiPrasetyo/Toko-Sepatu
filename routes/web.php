@@ -33,23 +33,5 @@ Route::get('/deskripsi/nike', [AdminController::class, 'nike'])->name('deskripsi
 Route::get('/deskripsi/puma', [AdminController::class, 'puma'])->name('deskripsi.puma');
 Route::get('/deskripsi/vans', [AdminController::class, 'vans'])->name('deskripsi.vans');
 
-
 // Route CRUD untuk Adidas
-Route::get('/admin/adidas', [AdminController::class, 'index'])->name('admin.adidas.index');
-Route::get('/admin/adidas/create', [AdminController::class, 'create'])->name('admin.adidas.create');
-Route::post('/admin/adidas', [AdminController::class, 'store'])->name('admin.adidas.store');
-Route::get('/admin/adidas/{adidas}', [AdminController::class, 'show'])->name('admin.adidas.show');
-Route::get('/admin/adidas/{adidas}/edit', [AdminController::class, 'edit'])->name('admin.adidas.edit');
-Route::put('/admin/adidas/{adidas}', [AdminController::class, 'update'])->name('admin.adidas.update');
-Route::delete('/admin/adidas/{adidas}', [AdminController::class, 'destroy'])->name('admin.adidas.destroy');
-
-// Route CRUD untuk Jordan
-Route::get('/admin/jordan', [AdminController::class, 'index'])->name('admin.jordan.index');
-Route::get('/admin/jordan/create', [AdminController::class, 'create'])->name('admin.jordan.create');
-Route::post('/admin/jordan', [AdminController::class, 'store'])->name('admin.jordan.store');
-Route::get('/admin/jordan/{jordan}', [AdminController::class, 'show'])->name('admin.jordan.show');
-Route::get('/admin/jordan/{jordan}/edit', [AdminController::class, 'edit'])->name('admin.jordan.edit');
-Route::put('/admin/jordan/{jordan}', [AdminController::class, 'update'])->name('admin.jordan.update');
-Route::delete('/admin/jordan/{jordan}', [AdminController::class, 'destroy'])->name('admin.jordan.destroy');
-
-Route::resource('admin', AdminController::class);
+Route::resource('admin/index', AdminController::class)->except(['index', 'create', 'store']);
