@@ -142,7 +142,7 @@ class AdminController extends Controller
     public function adidas(): View
     {
         $adidas = Adidas::latest()->paginate(10);
-        return view('admin.adidas', compact('adidas'));
+        return view('deskripsi.adidas', compact('adidas'));
     }
 
     public function jordan(): View
