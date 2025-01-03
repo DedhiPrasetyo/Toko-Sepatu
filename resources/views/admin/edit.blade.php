@@ -18,6 +18,8 @@
                     <option value="adidas" {{ $produk->jenis_produk == 'adidas' ? 'selected' : '' }}>Adidas</option>
                     <option value="jordan" {{ $produk->jenis_produk == 'jordan' ? 'selected' : '' }}>Jordan</option>
                     <option value="nike" {{ $produk->jenis_produk == 'nike' ? 'selected' : '' }}>Nike</option>
+                    <option value="vans" {{ $produk->jenis_produk == 'vans' ? 'selected' : '' }}>Vans</option>
+                    <option value="puma" {{ $produk->jenis_produk == 'puma' ? 'selected' : '' }}>Puma</option>
                 </select>
                 @error('jenis_produk')
                     <span class="text-red-500 text-sm">{{ $message }}</span>

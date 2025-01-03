@@ -19,6 +19,8 @@
                     <option value="adidas">Adidas</option>
                     <option value="jordan">Jordan</option>
                     <option value="nike">Nike</option>
+                    <option value="vans">Vans</option>
+                    <option value="puma">Puma</option>
                 </select>
             </div>
             <div class="mb-4" id="adidas_fields" style="display: none;">
@@ -138,6 +140,44 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="mb-4" id="vans_fields" style="display: none;">
+                <label for="jenis_vans" class="block text-sm font-medium text-gray-700">Jenis Vans</label>
+                <select name="jenis_vans" id="jenis_vans" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Vans Old Skool">Vans Old Skool</option>
+                    <option value="Vans Authentic">Vans Authentic</option>
+                    <option value="Vans Slip-On">Vans Slip-On</option>
+                    <option value="Vans Era">Vans Era</option>
+                    <option value="Vans Sk8-Hi">Vans Sk8-Hi</option>
+                    <option value="Vans Style 36">Vans Style 36</option>
+                    <option value="Vans Half Cab">Vans Half Cab</option>
+                    <option value="Vans Rowley">Vans Rowley</option>
+                    <option value="Vans TNT">Vans TNT</option>
+                    <option value="Vans AVE Pro">Vans AVE Pro</option>
+                </select>
+                @error('jenis_vans')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mb-4" id="puma_fields" style="display: none;">
+                <label for="jenis_puma" class="block text-sm font-medium text-gray-700">Jenis Puma</label>
+                <select name="jenis_puma" id="jenis_puma" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+                    <option value="" disabled selected>Pilih...</option>
+                    <option value="Puma Suede">Puma Suede</option>
+                    <option value="Puma RS-X">Puma RS-X</option>
+                    <option value="Puma Future Rider">Puma Future Rider</option>
+                    <option value="Puma Cali">Puma Cali</option>
+                    <option value="Puma Clyde">Puma Clyde</option>
+                    <option value="Puma Roma">Puma Roma</option>
+                    <option value="Puma Cell">Puma Cell</option>
+                    <option value="Puma Mayze">Puma Mayze</option>
+                    <option value="Puma Wild Rider">Puma Wild Rider</option>
+                    <option value="Puma Slipstream">Puma Slipstream</option>
+                </select>
+                @error('jenis_puma')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
             <div class="mb-4">
                 <label for="gambar" class="block text-sm font-medium text-gray-700">Gambar</label>
                 <input type="file" name="gambar" id="gambar" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500" required>
@@ -176,22 +216,27 @@
             var adidasFields = document.getElementById('adidas_fields');
             var jordanFields = document.getElementById('jordan_fields');
             var nikeFields = document.getElementById('nike_fields');
+            var vansFields = document.getElementById('vans_fields');
+            var pumaFields = document.getElementById('puma_fields');
+            
+            // Sembunyikan semua field terlebih dahulu
+            adidasFields.style.display = 'none';
+            jordanFields.style.display = 'none';
+            nikeFields.style.display = 'none';
+            vansFields.style.display = 'none';
+            pumaFields.style.display = 'none';
+            
+            // Tampilkan field sesuai pilihan
             if (this.value === 'adidas') {
                 adidasFields.style.display = 'block';
-                jordanFields.style.display = 'none';
-                nikeFields.style.display = 'none';
             } else if (this.value === 'jordan') {
                 jordanFields.style.display = 'block';
-                adidasFields.style.display = 'none';
-                nikeFields.style.display = 'none';
             } else if (this.value === 'nike') {
                 nikeFields.style.display = 'block';
-                adidasFields.style.display = 'none';
-                jordanFields.style.display = 'none';
-            } else {
-                adidasFields.style.display = 'none';
-                jordanFields.style.display = 'none';
-                nikeFields.style.display = 'none';
+            } else if (this.value === 'vans') {
+                vansFields.style.display = 'block';
+            } else if (this.value === 'puma') {
+                pumaFields.style.display = 'block';
             }
         });
     </script>
